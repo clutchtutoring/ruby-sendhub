@@ -42,7 +42,7 @@ class SendHub
 
 	def get_contacts(hsh = {})
 		if hsh.count > 0
-			api_url = base_url + "contacts" + credentials + hsh.to_query
+			api_url = base_url + "contacts" + credentials + "&" + hsh.to_query
 		else
 			api_url = base_url + "contacts" + credentials
 		end
