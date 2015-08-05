@@ -23,10 +23,10 @@ class SendHub
 			else
 				api_url = base_url + meth.last + "/" + hsh[:id].to_s + credentials
 			end
-		elsif meth.first == "get" && (meth.last == "threads" || meth.last == "messages" || !hsh[:id].nil?)
-			api_url = base_url + meth.last + "/" + hsh[:id].to_s + credentials
 		elsif meth.first == "get" && meth.last == "contacts"
 			api_url = base_url + meth.last + "/" + credentials + "&" + hsh.to_query
+		elsif meth.first == "get" && (meth.last == "threads" || meth.last == "messages" || !hsh[:id].nil?)
+			api_url = base_url + meth.last + "/" + hsh[:id].to_s + credentials
 		else
 			api_url = base_url + meth.last + credentials
 		end
