@@ -30,7 +30,11 @@ class SendHub
 		else
 			api_url = base_url + meth.last + credentials
 		end
-		ret = send_request(meth.first, api_url, :body => hsh.to_json)
+		if meth.first == "get" && meth.last == "contacts"
+			ret = send_request(meth.first, api_url)
+		else
+			ret = send_request(meth.first, api_url, :body => hsh.to_json)
+		end
 		ret.nil? && meth.first == "delete" ? "Aaaand it's gone" : ret
 	end
 
