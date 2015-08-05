@@ -46,7 +46,7 @@ class SendHub
 		else
 			api_url = base_url + "contacts" + credentials
 		end
-		send_request("get", api_url)
+		send_request("get", api_url, :body => {})
 	end
 
 	private
