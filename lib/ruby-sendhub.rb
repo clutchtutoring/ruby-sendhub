@@ -23,18 +23,12 @@ class SendHub
 			else
 				api_url = base_url + meth.last + "/" + hsh[:id].to_s + credentials
 			end
-		elsif meth.first == "get" && meth.last == "contacts"
-			api_url = base_url + meth.last + "/" + credentials + "&" + hsh.to_query
 		elsif meth.first == "get" && (meth.last == "threads" || meth.last == "messages" || !hsh[:id].nil?)
 			api_url = base_url + meth.last + "/" + hsh[:id].to_s + credentials
 		else
 			api_url = base_url + meth.last + credentials
 		end
-		if meth.first == "get" && meth.last == "contacts"
-			ret = send_request(meth.first, api_url)
-		else
-			ret = send_request(meth.first, api_url, :body => hsh.to_json)
-		end
+		ret = send_request(meth.first, api_url, :body => hsh.to_json)
 		ret.nil? && meth.first == "delete" ? "Aaaand it's gone" : ret
 	end
 
@@ -44,6 +38,15 @@ class SendHub
 
 	def post_groups_contacts(hsh = {})
 		send_request("post", group_contacts_url(hsh), :body => hsh.to_json)
+	end
+
+	def get_contacts(hsh = {})
+		if hsh.count > 0
+			api_url = base_url + "contacts" + credentials + hsh.to_query
+		else
+			api_url = base_url + "contacts" + credentials
+		end
+		send_request("get", api_url)
 	end
 
 	private
