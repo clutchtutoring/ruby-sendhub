@@ -50,7 +50,8 @@ class SendHub
 	end
 
 	def get_threads(hsh = {})
-		api_url = base_url + "threads/" + hsh[:id].to_s + credentials + "&unreadOnly=" + hsh['unreadOnly']
+		thread_id = hsh.delete(:id)
+		api_url = base_url + "threads/" + thread_id.to_s + credentials + "&" + hsh.to_query
 		send_request("get", api_url, :body => hsh.to_json)
 	end
 
