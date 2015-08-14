@@ -23,7 +23,7 @@ class SendHub
 			else
 				api_url = base_url + meth.last + "/" + hsh[:id].to_s + credentials
 			end
-		elsif meth.first == "get" && (meth.last == "threads" || meth.last == "messages" || !hsh[:id].nil?)
+		elsif meth.first == "get" && (meth.last == "messages" || !hsh[:id].nil?)
 			api_url = base_url + meth.last + "/" + hsh[:id].to_s + credentials
 		else
 			api_url = base_url + meth.last + credentials
@@ -47,6 +47,11 @@ class SendHub
 			api_url = base_url + "contacts" + credentials
 		end
 		send_request("get", api_url, :body => {})
+	end
+
+	def get_threads(hsh = {})
+		api_url = base_url + "threads/" + hsh[:id].to_s + credentials + "&unreadOnly=" + hsh['unreadOnly']
+		send_request("get", api_url, :body => hsh.to_json)
 	end
 
 	private
