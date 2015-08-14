@@ -55,6 +55,11 @@ class SendHub
 		send_request("get", api_url, :body => hsh.to_json)
 	end
 
+	def get_inbox(hsh = {})
+		api_url = base_url + "inbox" + credentials + "&" + hsh.to_query
+		send_request("get", api_url, :body => hsh.to_json)
+	end
+
 	private
 
 		def group_contacts_url(hsh)
