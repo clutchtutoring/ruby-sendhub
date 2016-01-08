@@ -40,9 +40,11 @@ class SendHub
 		send_request("post", group_contacts_url(hsh), :body => hsh.to_json)
 	end
 
-	def get_contacts(hsh = {})
+	def get_contacts(hsh = {}, contact_id=false)
 		if hsh.count > 0
 			api_url = base_url + "contacts" + credentials + "&" + hsh.to_query
+		elsif contact_id != false
+			api_url = base_url + "contacts/" + contact_id.to_s + credentials + "&" + hsh.to_query
 		else
 			api_url = base_url + "contacts" + credentials
 		end
