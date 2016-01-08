@@ -41,10 +41,10 @@ class SendHub
 	end
 
 	def get_contacts(hsh = {}, contact_id=false)
-		if hsh.count > 0
+		if hsh.count > 0 and hsh[:contact_id].blank?
 			api_url = base_url + "contacts" + credentials + "&" + hsh.to_query
-		elsif contact_id != false
-			api_url = base_url + "contacts/" + contact_id.to_s + credentials + "&" + hsh.to_query
+		elsif hsh.count > 0 and hsh[:contact_id].blank?
+			api_url = base_url + "contacts/" + hsh[:contact_id].to_s + credentials + "&" + hsh.to_query
 		else
 			api_url = base_url + "contacts" + credentials
 		end
